@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>HOME</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+{% load static %}
+<style>
+    body{
+        background-image: url('{% static "images/Image 6.jpg" %}');
+        background-size: cover;
+    }
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'Home' %}">HOME</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">LOGIN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">SIGNUP</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'Student' %}">STUDENT Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'student_showpage' %}">SHOW STUDENT DETAILS</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'logout' %}">LOGOUT</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="nav bg-secondary">
+    <h1  style="color: brown; margin-left: 40%;">HOME PAGE</h1></div>
+    <div style="background-color: lightgrey; width: 300px; border: 10px solid green; padding: 100px; margin: 70px 100px 75px 500px;">
+        <table>
+        <tr><button class="btn btn-outline-success"><a href="{% url 'loginpage' %}" style="color: green; " >TEACHER LOGIN PAGE</a></button></tr><br><br>
+        <tr><button class="btn btn-outline-danger"><a href="{% url 'Student' %}" style="color: red;">STUDENT ADDING PAGE</a></button></tr>
+        </table>
+    </div>
+{% block content %}
+{% endblock %}
+</body>
+</html>

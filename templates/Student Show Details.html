@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Show Student Details</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+{% load static %}
+<style>
+    body {
+        background-image: url('{% static "images/Image 4.jpg" %}');
+        background-size: cover;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'Home' %}">HOME</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'Student' %}">STUDENT Details<span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'student_showpage' %}">SHOW STUDENT DETAILS</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class=" text-center" style="color: blue;">SHOW STUDENT DETAILS<button class="btn btn-outline-success"><a
+                    href="{% url 'Student' %}" style="color: green; ">ADD</a></button></h1><br><br>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <table class="table text-center " border="5"
+                    style="text-align: center; color: black; background-color: peachpuff;">
+                    <thead>
+                        <tr>
+                            <th scope="col">FIRST NAME</th>
+                            <th scope="col">LAST NAME</th>
+                            <th scope="col">AGE</th>
+                            <th scope="col">DATE OF BIRTH</th>
+                            <th scope="col">GENDER</th>
+                            <th scope="col">QUALIFICATION</th>
+                            <th scope="col">IMAGE</th>
+                            <th scope="col">ACTION</th>
+                            <th scope="col">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in register %}
+                        <tr>
+                            <td class="pt-4">{{ p.first_name}}</td>
+                            <td class="pt-4">{{ p.last_name}}</td>
+                            <td class="pt-4">{{ p.age}}</td>
+                            <td class="pt-4">{{ p.date_of_birth}}</td>
+                            <td class="pt-4">{{ p.gender}}</td>
+                            <td class="pt-4">{{ p.qualifications}}</td>
+                            <td>
+                                {% if p.image %}
+                                <img src="{{ p.image.url }}" class="w-25">
+                                {% else %}
+                                <img src="{% static 'images/Image 13.jpg' %}" class="w-25">
+                                {% endif %}
+                            </td>
+                            <td><button class="btn btn-outline-success"><a href="{% url 'student_editpage' p.id %}"
+                                        style="color: green; ">Edit</a></button></td>
+                            <td><button class="btn btn-outline-danger"><a href="{% url 'deletepage' p.id %}"
+                                        style="color: red;">Delete</a></button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

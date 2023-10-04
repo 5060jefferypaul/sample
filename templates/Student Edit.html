@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Product Edit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+{% load static %}
+<style>
+    body{
+        background-image: url('{% static "images/Image 3.jpg" %}');
+        background-size: cover;
+    }
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'Home' %}">HOME</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'Student' %}">Student Details<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'student_showpage' %}">Show Student Details</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav><br>
+    <h1 style="color: gray;text-align: center;">UPDATE STUDENT DETAILS</h1>
+    <div style="text-align: center; color: brown;">
+    <form method="post" enctype="multipart/form-data" action="{% url 'edit_student_details' register.id %}"><br>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-10">
+                <table class="table text-center " border="5" style="text-align: center; color: brown; background-color: lightblue;" class="w-660">
+                    <thead>
+                        <tr>
+                            <th scope="col">FIRST NAME</th>
+                            <th scope="col">LAST NAME</th>
+                            <th scope="col">AGE</th>
+                            <th scope="col">DATE OF BIRTH</th>
+                            <th scope="col">GENDER</th>
+                            <th scope="col">QUALIFICATION</th>
+                            <th scope="col">IMAGE</th>
+                            <th scope="col">ACTION</th>
+    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pt-4"><input type="text" name="first_name" value="{{ register.first_name }}"></td>
+                            <td class="pt-4"><input type="text" name="last_name" value="{{ register.last_name }}"></td>
+                            <td class="pt-4"><input type="number" name="age" value="{{ register.age }}"></td>
+                            <td class="pt-4"><input type="date" name="date_of_birth" value="{{ register.date_of_birth |date:'Y-m-d'}}"></td>
+                            <td class="pt-4">
+                                <select name="gender">
+                                    <option value="Male" {% if register.gender == "Male" %}selected{% endif %}>Male</option>
+                                    <option value="Female" {% if register.gender == "Female" %}selected{% endif %}>Female</option>
+                                </select>
+                            </td>
+                            <td class="pt-4">
+                                <select id="qualifications" name="qualifications">
+                                    <option value="" name="qualifications">Select an Option</option>
+                                    <option value="BTECH" name="qualifications" {% if register.qualifications == "BTECH" %}selected{% endif %} >B.Tech</option>
+                                    <option value="BCOM" name="qualifications" {% if register.qualifications == "BCOM" %}selected{% endif %}>B.Com</option>
+                                    <option value="BSC" name="qualifications" {% if register.qualifications == "BSC" %}selected{% endif %}>B.Sc</option>
+                                    <option value="MBA" name="qualifications" {% if register.qualifications == "MBA" %}selected{% endif %}>MBA</option>
+                                    <option value="MTECH" name="qualifications" {% if register.qualifications == "MTECH" %}selected{% endif %}>M.Tech</option>
+                                    <option value="MSC" name="qualifications" {% if register.qualifications == "MSC" %}selected{% endif %}>M.Sc</option>
+                                    <option value="PHD" name="qualifications" {% if register.qualifications == "PHD" %}selected{% endif %}>PhD</option>
+                                    <option value="OTHER" name="qualifications" {% if register.qualifications == "OTHER" %}selected{% endif %}>Other</option>
+                                </select>
+                            </td>
+                            <td>
+                                {% if register.image %}
+                                <img src="{{ register.image.url }}" class="w-25">
+                                {% else %}
+                                <img src="{% static 'images/Image 13.jpg' %}" class="w-25">
+                                {% endif %}
+                            </td>
+                            <td><input type="file" name="file" accept="image/*" ></td>
+                            <td><Button class="btn btn-outline-success" style="color: red;" type="submit">UPDATE</Button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </form>
+    </div>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

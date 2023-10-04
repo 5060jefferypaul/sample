@@ -1,0 +1,84 @@
+<html lang="en">
+    <head>
+        <title>
+            Website
+        </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> 
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+        <body style=" background-color: peachpuff;">
+        
+
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <!-- Brand -->
+                <a class="navbar-brand" href="{% url 'Home' %}">Home</a>
+              
+                <!-- Toggler/collapsibe Button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <!-- Navbar links -->
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">LOGIN</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'signup'%}">SIGNUP</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'about' %}">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logout' %}">LOGOUT</a>
+                  </li>
+                  </ul>
+                </div>
+              </nav>
+
+
+
+              <div class="nav bg-success">
+                <h1 class="text-light" style="margin-left: 40%; ">REGISTRATION</h1>
+            </div>
+            <div class="container">
+                {% for message in messages %}
+            <h5>
+                <div class="alert alert-danger mt-5" style="width: 50%;">
+                    {{ message }}
+                </div>
+            </h5>
+                {% endfor %}
+            </div>
+            <div class="container bg-light" style="border-radius: 10px; width:50%">
+               <form action="{% url 'usercreate' %}" method="post" class="form pt-5 pb-5" style="width: 50%; margin-left:25%">
+                   {% csrf_token %}
+            
+                   <input type="text" name="first_name" class="form-control" placeholder="First Name"><br>
+                   <input type="text" name="last_name"class="form-control" placeholder="Last Name"><br>
+                   <input type="text" name="username" class="form-control" placeholder="Username"><br>
+                   <input type="email" name="email" class="form-control" placeholder="Email"><br>
+                   <input type="password" name="password" class="form-control" placeholder="Strong Password"><br>
+                   <input type="password" name="cpassword" class="form-control" placeholder="Confirm Password"><br>
+                   
+                   <button type="submit" class="btn btn-outline-info" style="margin-left: 40%;">Submit</button>
+                   <br>
+                   <p class='text-muted'>Already a member. <a href="#">Login</a></p>
+               </form>
+            </div>
+{% block content %}
+{% endblock %}
+</body>
+</html>
